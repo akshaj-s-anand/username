@@ -15,13 +15,20 @@ def custom_login(request):
                 return redirect('user_dashboard', pk=user.pk)
             elif user.groups.filter(name='Admin').exists():
                 return redirect('admin_dashboard', pk=user.pk)
+            elif user.is_superuser:
+                return redirect('superuser_dashboard', pk=user.pk)
             else:
-                return redirect('default_dashboard')
+                return redirect('login')
         else:
             # Invalid credentials
             return render(request, 'login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'login.html')
+
+@login_required
+def superuser_dashboard_view(request, pk):
+    # Add logic specific to user dashboard
+    return render(request, 'superuser_dashboard.html', {'user_id': pk})
 
 @login_required
 def user_dashboard_view(request, pk):
