@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Profile Details</h1>
+  <table>
+    <tr>
+      <th>Field</th>
+      <th>Value</th>
+    </tr>
+    <tr>
+      <td>Username</td>
+      <td>{{ profile.username }}</td>
+    </tr>
+    <tr>
+      <td>Email</td>
+      <td>{{ profile.email }}</td>
+    </tr>
+    <tr>
+      <td>First Name</td>
+      <td>{{ profile.first_name }}</td>
+    </tr>
+    <tr>
+      <td>Last Name</td>
+      <td>{{ profile.last_name }}</td>
+    </tr>
+    <tr>
+      <td>Date Joined</td>
+      <td>{{ profile.date_joined }}</td>
+    </tr>
+    <tr>
+      <td>Last Login</td>
+      <td>{{ profile.last_login }}</td>
+    </tr>
+    <tr>
+      <td>Is Active</td>
+      <td>{{ profile.is_active }}</td>
+    </tr>
+    <tr>
+      <td>Is Staff</td>
+      <td>{{ profile.is_staff }}</td>
+    </tr>
+    <tr>
+      <td>Is Superuser</td>
+      <td>{{ profile.is_superuser }}</td>
+    </tr>
+  </table>
+  <a href="{% url 'profile_edit' %}" class="save-btn">Edit Profile</a>
+  <a href="{% url 'superuser_dashboard' %}" class="back-btn">Back Home</a>
+{% endblock %}

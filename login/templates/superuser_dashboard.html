@@ -1,2 +1,36 @@
-<h1>hi i am superuser {{user.username}}</h1>
-<a href="{% url 'custom_logout' %}">Logout</a>
+{% extends 'base.html' %}
+{% block content %}
+  <header>
+    <h1>Welcome to the Superuser Dashboard, {{ user.username }}</h1>
+  </header>
+
+  <nav>
+    <ul>
+      {% comment %} <li>
+        <a href="{% url 'some_dashboard_url' %}">Dashboard</a>
+      </li> {% endcomment %}
+      <li>
+        <a href="{% url 'profile' %}" class="save-btn">Profile</a>
+      </li>
+      {% comment %} <li>
+        <a href="{% url 'logout' %}">Logout</a>
+      </li> {% endcomment %}
+    </ul>
+  </nav>
+
+  <section>
+    <h2>Dashboard Overview</h2>
+    <p>Here you can manage the system, view reports, and more.</p>
+    <!-- Add more dashboard-specific content here -->
+  </section>
+
+  <section>
+    <h2>Your Details</h2>
+    <ul>
+      <li>Username: {{ user.username }}</li>
+      <li>Email: {{ user.email }}</li>
+      <li>Full Name: {{ user.get_full_name }}</li>
+      <!-- Add more user details as needed -->
+    </ul>
+  </section>
+{% endblock %}

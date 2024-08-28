@@ -1,0 +1,201 @@
+:root {
+    --primary-color: #2E073F; /* Primary color */
+    --secondary-color: #AD49E1; /* Secondary color */
+    --input-bg-color: #7A1CAC; /* Background color for input fields */
+    --input-border-color: #2E073F; /* Border color for input fields */
+    --input-border-focus-color: var(--primary-color); /* Border color on focus */
+    --input-text-color: #f1f1f1; /* Text color inside input fields */
+    --background-color: #EBD3F8; /* Background color */
+    --cancel-color: #e74c3c; /* Color for cancel button */
+    --save-color: #2E073F; /* Color for save button */
+    --back-color: #f39c12; /* Color for back button */
+    --reset-pass-color: #9b59b6; /* Color for reset password button */
+    --btn-text-color: #fff; /* Text color for buttons */
+    --btn-hover-opacity: 0.8; /* Opacity for hover effect */
+    --btn-border-radius: 4px; /* Border radius for buttons */
+}
+
+body{
+    background-color: var(--background-color);
+    overflow-x: hidden
+}
+
+
+/* styles for table  */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    color: #f9f9f9; /* Default text color */
+}
+
+th, td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+tr:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+td {
+    background-color: #f9f9f9; /* Default cell background color */
+}
+
+td .helptext{
+    display: none;
+}
+
+tr:nth-child(even) td {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+tr:nth-child(odd) td {
+    background-color: var(--primary-color); /* Light grey for odd rows */
+}
+
+
+/* form feilds  */
+
+form {
+    background-color: var(--primary-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #ccc;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 4px;
+    background-color: var(--input-bg-color);
+    color: var(--input-text-color);
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--input-border-focus-color);
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.5); /* Adjust the shadow color to match your primary color */
+    outline: none;
+}
+
+button,
+input[type="submit"],
+input[type="button"] {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: var(--secondary-color);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background-color: var(--secondary-color);
+}
+
+button:disabled,
+input[type="submit"]:disabled,
+input[type="button"]:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* time  */
+
+.time {
+    font-size: 12px;
+    color: #ccc;
+}
+
+/* links */
+a {
+    text-decoration: none;
+}
+a.cancel-btn,
+a.save-btn,
+a.back-btn,
+a.reset-pass-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--btn-border-radius);
+    color: var(--btn-text-color);
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
+a.cancel-btn {
+    background-color: var(--cancel-color);
+}
+
+a.cancel-btn:hover {
+    opacity: var(--btn-hover-opacity);
+}
+
+a.save-btn {
+    background-color: var(--save-color);
+}
+
+a.save-btn:hover {
+    opacity: var(--btn-hover-opacity);
+}
+
+a.back-btn {
+    background-color: var(--back-color);
+}
+
+a.back-btn:hover {
+    opacity: var(--btn-hover-opacity);
+}
+
+a.reset-pass-btn {
+    background-color: var(--reset-pass-color);
+}
+
+a.reset-pass-btn:hover {
+    opacity: var(--btn-hover-opacity);
+}
+
+/* navigation bar  */
+.nav-y{
+    background-color: var(--primary-color);
+    min-height: 100vh;
+}
