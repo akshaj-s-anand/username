@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'login',
     'superuser',
     'admin_app',
+    'parking',
 ]
 
 MIDDLEWARE = [

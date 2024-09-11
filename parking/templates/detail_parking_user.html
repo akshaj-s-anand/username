@@ -1,0 +1,51 @@
+<!-- Detail page -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Parking Staff Details</h1>
+    
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>Username:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ parking.username }}</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>First Name:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ parking.first_name }}</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>Last Name:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ parking.last_name }}</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>Email:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ parking.email }}</p>
+        </div>
+    </div>
+
+    <!-- Edit and Delete Buttons -->
+    <div class="d-flex justify-content-start mt-4">
+        <a href="{% url 'edit_parking_user' parking.pk %}" class="save-btn">Edit Parking Staff</a>
+        <a href="{% url 'list_parking_user' %}" class="back-btn mx-3">Back to List</a>
+        <a href="{% url 'delete_parking_user' parking.pk %}" class="cancel-btn">Delete Parking Staff</a>
+    </div>
+</div>
+{% endblock %}

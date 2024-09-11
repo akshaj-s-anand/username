@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>{% if object %}Edit Engineer{% else %}Create Engineer{% endif %}</h1>
+<h1>{% if object %}Edit {{user.username}} {% else %}Create User {% endif %}</h1>
 
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="">Next</button>
-    <a href="{% url "profile" %}" class="cancel-btn">Cancel</a>
+    <button class="cancel-btn" onclick="window.history.back()">Cancel</button>
 </form>
 
 {% endblock %}
