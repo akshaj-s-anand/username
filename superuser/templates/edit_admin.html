@@ -1,0 +1,8 @@
+<h1>Edit Engineer</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a href="{% url 'detail_admin' object.pk %}" class="btn btn-secondary">Cancel</a>
+</form>

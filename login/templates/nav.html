@@ -1,0 +1,20 @@
+<ul class="nav-icons pt-5">
+    <li class="{% if request.path == '/superuser-dashboard/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'superuser_dashboard' %}" role="button">
+        <i class="fa-solid fa-gauge-high"></i> Dashboard
+    </li>
+    <li class="{% if request.path == '/superuser/profile/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'profile' %}" role="button">
+        <i class="fa-solid fa-user"></i> Profile
+    </li>
+    <hr>
+    <small class="py-2 text-center d-flex justify-content-center">Manage Users</small>
+    <li class="{% if request.path == '/superuser/create-user/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'create_admin' %}" role="button">
+        <i class="fa-solid fa-plus"></i> Create User
+    </li>
+    <li class="{% if request.path == '/superuser/list-engineer/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'list_admin' %}" role="button">
+        <i class="fa-solid fa-wrench"></i> Engineer
+    </li>
+    
+</ul>
+
+
+

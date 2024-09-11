@@ -199,3 +199,20 @@ a.reset-pass-btn:hover {
     background-color: var(--primary-color);
     min-height: 100vh;
 }
+/* navbar  */
+.nav-icons{
+    list-style: none;
+    color: #fff;
+}
+.active{
+    background-color: var(--input-bg-color);
+}
+.clickable {
+    cursor: pointer;
+}
+.clickable:hover {
+    background-color: var(--input-bg-color);
+}
+.rounded-l{
+    border-radius: 40px 0 0 40px;
+}

@@ -1,0 +1,51 @@
+<!-- Detail page -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4">Engineer Details</h1>
+    
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>Username:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ engineer.username }}</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>First Name:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ engineer.first_name }}</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>Last Name:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ engineer.last_name }}</p>
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-md-3">
+            <strong>Email:</strong>
+        </div>
+        <div class="col-md-9">
+            <p>{{ engineer.email }}</p>
+        </div>
+    </div>
+
+    <!-- Edit and Delete Buttons -->
+    <div class="d-flex justify-content-start mt-4">
+        <a href="{% url 'edit_admin' engineer.pk %}" class="save-btn">Edit Engineer</a>
+        <a href="{% url 'list_admin' %}" class="back-btn mx-3">Back to List</a>
+        <a href="{% url 'delete_admin' engineer.pk %}" class="cancel-btn">Delete Engineer</a>
+    </div>
+</div>
+{% endblock %}

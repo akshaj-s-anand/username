@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% block title %}Dashboard | {{user.username}}{% endblock title %}
 {% block content %}
   <header>
     <h1>Welcome to the Superuser Dashboard, {{ user.username }}</h1>
@@ -33,4 +34,18 @@
       <!-- Add more user details as needed -->
     </ul>
   </section>
+  <section>
+    <h3>My Recent Actions</h3>
+    <ul>
+        {% for action in recent_actions %}
+            <li>{{ action.action_time }} - 
+                {{ action.get_action_flag_display }} 
+                on {{ action.content_type }}: 
+                "{{ action.object_repr }}"
+            </li>
+        {% empty %}
+            <li>No recent actions found.</li>
+        {% endfor %}
+    </ul>
+</section>
 {% endblock %}

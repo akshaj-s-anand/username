@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="d-flex justify-content-between mt-3">
+    <h1>List Engineers</h1>
+    <a href="{% url 'create_admin' %}" class="save-btn mx-3">Add User</a>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Groups</th>
+        <th>Permissions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for engineer in engineers %}
+        <tr onclick="window.location.href='{% url 'detail_admin' engineer.pk %}'" style="cursor: pointer;">
+          <td>{{ engineer.username }}</td>
+          <td>{{ engineer.groups.all|join:', ' }}</td>
+          <td>{{ engineer.user_permissions.all|join:', ' }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <style>
+    tbody tr td a {
+      text-decoration: none;
+      color: #fff;
+    }
+  </style>
+{% endblock %}

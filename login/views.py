@@ -5,9 +5,20 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import DetailView
 from django.contrib.auth.models import User
+from django.contrib.admin.models import LogEntry
 from django.core.exceptions import PermissionDenied
 
 def custom_login(request):
+    if request.user.is_authenticated:
+        if request.user.groups.filter(name='User').exists():
+            return redirect('user_dashboard', pk=request.user.pk)
+        elif request.user.groups.filter(name='Admin').exists():
+            return redirect('admin_dashboard', pk=request.user.pk)
+        elif request.user.is_superuser:
+            return redirect('superuser_dashboard')
+        else:
+            return redirect('login')
+
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -48,7 +59,9 @@ class SuperuserDashboardView(LoginRequiredMixin, UserPassesTestMixin, DetailView
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Add any additional context data here
+        # Retrieve recent admin actions by the current superuser
+        recent_actions = LogEntry.objects.filter(user=self.request.user).order_by('-action_time')[:10]
+        context['recent_actions'] = recent_actions
         return context
 
 @login_required

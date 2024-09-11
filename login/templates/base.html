@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" type="text/css" href="{% static '/css/styles.css' %}" />
-    <title>Document</title>
+    <title>{% block title %}{% endblock title %}</title>
   </head>
   <body>
     <div class="">
@@ -21,7 +21,7 @@
     </div>
     {% block topnav %}
       <div class="bg-dark py-2 row">
-        <div class="col-3"></div>
+        <div class="col-3 text-white text-capitalize d-flex justify-content-center align-items-center"><i class="fa-solid fa-user mx-2"></i>{{user.username}}</div>
         <div class="col-3"></div>
         <div class="col-3"></div>
         <div class="col-3 d-flex justify-content-around align-items-center">
@@ -37,7 +37,7 @@
       {% block nav %}
         <div class="col-3">
             <div class="d-flex flex-column nav-y">
-                
+                {% include 'nav.html' %}
             </div>
         </div>
       {% endblock %}
@@ -84,5 +84,23 @@
         })
       })
     </script>
+
+    <script>
+      // Use JavaScript to handle click events
+      document.addEventListener('DOMContentLoaded', function() {
+          // Get all elements with the class 'clickable'
+          var clickableElements = document.querySelectorAll('.clickable');
+  
+          // Add click event listener to each element
+          clickableElements.forEach(function(element) {
+              element.addEventListener('click', function() {
+                  var link = this.getAttribute('data-link');
+                  if (link) {
+                      window.location.href = link;
+                  }
+              });
+          });
+      });
+  </script>
   </body>
 </html>
