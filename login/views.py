@@ -8,16 +8,13 @@ from django.contrib.auth.models import User
 from django.contrib.admin.models import LogEntry
 from django.core.exceptions import PermissionDenied
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import Group
+
 def custom_login(request):
     if request.user.is_authenticated:
-        if request.user.groups.filter(name='User').exists():
-            return redirect('user_dashboard', pk=request.user.pk)
-        elif request.user.groups.filter(name='Admin').exists():
-            return redirect('admin_dashboard', pk=request.user.pk)
-        elif request.user.is_superuser:
-            return redirect('superuser_dashboard')
-        else:
-            return redirect('login')
+        return redirect('superuser_dashboard')  # Redirect to a unified dashboard
 
     if request.method == 'POST':
         username = request.POST['username']
@@ -26,54 +23,39 @@ def custom_login(request):
 
         if user is not None:
             login(request, user)
-            if user.groups.filter(name='User').exists():
-                return redirect('user_dashboard', pk=user.pk)
-            elif user.groups.filter(name='Admin').exists():
-                return redirect('admin_dashboard', pk=user.pk)
-            elif user.is_superuser:
-                return redirect('superuser_dashboard')
-            else:
-                return redirect('login')
+            return redirect('superuser_dashboard')  # Redirect all users to the unified dashboard
         else:
             # Invalid credentials
             return render(request, 'login.html', {'error': 'Invalid credentials'})
 
     return render(request, 'login.html')
 
-class SuperuserDashboardView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+class SuperuserDashboardView(LoginRequiredMixin, DetailView):
     model = User
     template_name = 'superuser_dashboard.html'
-    context_object_name = 'superuser'
+    context_object_name = 'user'
 
     def get_object(self, queryset=None):
-        # Return the current logged-in user's profile
+        # Return the current logged-in user
         return self.request.user
-
-    def test_func(self):
-        # Check if the logged-in user is a superuser
-        return self.request.user.is_superuser
-
-    def handle_no_permission(self):
-        # Redirect non-superusers to a different page or raise a PermissionDenied error
-        raise PermissionDenied("You do not have permission to access this page.")
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Retrieve recent admin actions by the current superuser
+        # Retrieve recent actions by the current user (can be any user)
         recent_actions = LogEntry.objects.filter(user=self.request.user).order_by('-action_time')[:10]
         context['recent_actions'] = recent_actions
         return context
 
-@login_required
-def user_dashboard_view(request, pk):
-    # Add logic specific to user dashboard
-    return render(request, 'user_dashboard.html', {'user_id': pk})
+# @login_required
+# def user_dashboard_view(request, pk):
+#     # Add logic specific to user dashboard
+#     return render(request, 'user_dashboard.html', {'user_id': pk})
 
 
-@login_required
-def admin_dashboard_view(request, pk):
-    # Add logic specific to admin dashboard
-    return render(request, 'admin_dashboard.html', {'admin_id': pk})
+# @login_required
+# def admin_dashboard_view(request, pk):
+#     # Add logic specific to admin dashboard
+#     return render(request, 'admin_dashboard.html', {'admin_id': pk})
 
 
 @login_required

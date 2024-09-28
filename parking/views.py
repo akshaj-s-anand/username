@@ -5,6 +5,8 @@ from superuser.forms import CustomUserCreationForm
 from django.urls import reverse_lazy
 from django.http import Http404
 from django.contrib import messages  # Import messages
+from parking.models import VehicleType, VehicleInfo
+from parking.forms import VehicleTypeForm
 
 
 # Create your views here.
@@ -79,3 +81,46 @@ class DeleteParkingUserView(DeleteView):
         if not user.groups.filter(name=engineer_group.name).exists():
             raise Http404("This user is not a parking user.")
         return user
+
+class VehicleTypeView(CreateView):
+    model = VehicleType
+    template_name = 'add_vehicle_type.html'  # Reuse the same template
+    form_class = VehicleTypeForm
+    success_url = reverse_lazy('vehicle_list')
+
+    def form_valid(self, form):
+        
+        # Add success message
+        messages.success(self.request, "Vehicle type added successfully!")
+        return super().form_valid(form)
+        
+class ListVehicleTypeView(ListView):
+    model = VehicleType
+    template_name = 'list_vehicle_type.html'
+    context_object_name = 'vehicles'  # Use a more meaningful name here
+
+
+class DetailVehicleTypeView(DetailView):
+    model = VehicleType
+    template_name = 'detail_vehicle_type.html'
+    context_object_name = 'parking'
+
+
+class VehicleTypeUpdateView(UpdateView):
+    model = VehicleType
+    template_name = 'add_vehicle_type.html'
+    form_class = VehicleTypeForm
+    success_url = reverse_lazy('vehicle_list')
+
+    def form_valid(self, form):
+        messages.success(self.request, "Vehicle type updated successfully!")
+        return super().form_valid(form)
+    
+class VehicleTypeDeleteView(DeleteView):
+    model = VehicleType
+    success_url = reverse_lazy('vehicle_list')  # Redirect after successful deletion
+    
+    def delete(self, request, *args, **kwargs):
+        # Add a success message before deletion
+        messages.success(request, "Vehicle type deleted successfully!")
+        return super().delete(request, *args, **kwargs)

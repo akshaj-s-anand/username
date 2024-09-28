@@ -2,7 +2,7 @@
 {% block title %}Dashboard | {{user.username}}{% endblock title %}
 {% block content %}
   <header>
-    <h1>Welcome to the Superuser Dashboard, {{ user.username }}</h1>
+    <h1>Welcome to the {% if user.groups.all|length > 0 %}{{ user.groups.first.name }}{% else %}User{% endif %} Dashboard, {{ user.username }}</h1>
   </header>
 
   <nav>

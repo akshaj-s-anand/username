@@ -1,9 +1,12 @@
 {% extends 'base.html' %}
+{% load custom_filters %}
 
 {% block content %}
   <div class="d-flex justify-content-between mt-3">
     <h1>List Parking Staff</h1>
+    {% if user.is_superuser or user|is_group:"Admin" %}
     <a href="{% url 'create_admin' %}" class="save-btn mx-3">Add User</a>
+    {% endif %}
   </div>
 
   <table>

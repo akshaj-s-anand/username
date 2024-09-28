@@ -163,11 +163,11 @@ a.reset-pass-btn {
 }
 
 a.cancel-btn {
-    background-color: var(--cancel-color);
+    background-color: var(--cancel-color) !important;
 }
 
 a.cancel-btn:hover {
-    opacity: var(--btn-hover-opacity);
+    opacity: var(--btn-hover-opacity) !important;
 }
 
 a.save-btn {
@@ -197,7 +197,7 @@ a.reset-pass-btn:hover {
 /* navigation bar  */
 .nav-y{
     background-color: var(--primary-color);
-    min-height: 100vh;
+    min-height: 100%;
 }
 /* navbar  */
 .nav-icons{

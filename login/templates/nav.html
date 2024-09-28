@@ -1,3 +1,4 @@
+{% load custom_filters %}
 <ul class="nav-icons pt-5">
     <li class="{% if request.path == '/superuser-dashboard/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'superuser_dashboard' %}" role="button">
         <i class="fa-solid fa-gauge-high"></i> Dashboard
@@ -5,6 +6,11 @@
     <li class="{% if request.path == '/superuser/profile/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'profile' %}" role="button">
         <i class="fa-solid fa-user"></i> Profile
     </li>
+
+    
+
+    {% if user.is_superuser or user|is_group:"Admin" %}
+    <!-- Only superusers and admin users will see this section -->
     <hr>
     <small class="py-2 text-center d-flex justify-content-center">Manage Users</small>
     <li class="{% if request.path == '/superuser/create-user/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'create_admin' %}" role="button">
@@ -16,8 +22,18 @@
     <li class="{% if request.path == '/parking/parking-users/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'list_parking_user' %}" role="button">
         <i class="fa-solid fa-car"></i> Parking Staff
     </li>
+    {% endif %}
+
+    <!-- Parking Staff should still see their section -->
+    <hr>
+    <small class="py-2 text-center d-flex justify-content-center">Parking</small>
+    <li class="{% if request.path == '/superuser/create-user/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'create_admin' %}" role="button">
+        <i class="fa-solid fa-square-parking"></i> Parking 
+    </li>
+    <li class="{% if request.path == '/superuser/create-user/' %}active{% endif %} px-5 py-3 mt-2 clickable rounded-l" data-link="{% url 'vehicle_list' %}" role="button">
+        <i class="fa-solid fa-square-parking"></i> Parking Fair
+    </li>
+
     
+
 </ul>
-
-
-

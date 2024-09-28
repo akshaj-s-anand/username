@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+  <div class="d-flex justify-content-between mt-3">
+    <h1>List of Vehicles</h1>
+    {% if user.is_superuser or user|is_group:"Admin" %}
+      <a href="{% url 'vehicle_create' %}" class="save-btn mx-3">Add Vehicle Type</a>
+    {% endif %}
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Vehicle Type</th>
+        <th>Fair</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for vehicle in vehicles %}  <!-- Iterate over 'vehicles', not 'parking' -->
+        <tr onclick="window.location.href='{% url 'vehicle_list_details' vehicle.pk %}'" style="cursor: pointer;">
+          <td>{{ vehicle.vehicle_type }}</td>
+          <td>{{ vehicle.fair }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+  <style>
+    tbody tr td a {
+      text-decoration: none;
+      color: #fff;
+    }
+  </style>
+{% endblock %}
